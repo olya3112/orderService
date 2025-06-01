@@ -22,17 +22,31 @@ configurations {
 repositories {
 	mavenCentral()
 }
+ext {
+	springBootVersion = '3.5.0'
+	dependencyManagementVersion = '1.1.7'
+	camundaVersion = '7.23.0'
+	lombokVersion = '1.18.28'
+	postgresqlVersion = '42.6.0'
+	junitPlatformLauncherVersion = '1.10.0'
+}
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
-	implementation 'org.springframework.kafka:spring-kafka'
-	compileOnly 'org.projectlombok:lombok'
-	runtimeOnly 'org.postgresql:postgresql'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.kafka:spring-kafka-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:${camundaVersion}"
+	implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${camundaVersion}"
+	implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:${camundaVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-freemarker"
+	implementation "org.springframework.kafka:spring-kafka"
+
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+	runtimeOnly "org.postgresql:postgresql:${postgresqlVersion}"
+
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+	testImplementation "org.springframework.kafka:spring-kafka-test"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}"
 }
 
 tasks.named('test') {
