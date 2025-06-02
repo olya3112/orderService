@@ -14,7 +14,7 @@ public class CheckDmnController {
 
     @PostMapping("/start-process")
     public String startProcess() throws InterruptedException {
-        checkDMNService.startSimpleProcess();
+        checkDMNService.startCheckDmnProcess();
         return "Процесс запущен!";
     }
 }
