@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.BpmnProcess;
 import org.camunda.bpm.engine.RuntimeService;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +26,13 @@ public class CheckDMNService {
         return String.format("mma_%04d", number);
     }
 
-    /**
-     * Запускает процесс simple_project с уникальным бизнес-ключом и передаёт переменные.
-     */
-    public void startSimpleProcess() throws InterruptedException {
+
+    public void startCheckDmnProcess(){
+
         String businessKey = generateBusinessKey();
+        Map<String, Object> vars = new HashMap<>();
+        vars.put("type", "value");
 
-        Map<String, Object> variables = new HashMap<>();
-        variables.put("type", "value"); // Добавьте нужные переменные процесса
-
-        runtimeService.startProcessInstanceByKey("simple_project", businessKey, variables);
-        Thread.sleep(3000);
-        System.out.println("Процесс simple_project запущен с бизнес-ключом: " + businessKey);
+        runtimeService.startProcessInstanceByKey(BpmnProcess.CHECK_DMN_RULES.getId(), businessKey, vars);
     }
 }
